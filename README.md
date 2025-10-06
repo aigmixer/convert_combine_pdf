@@ -48,8 +48,10 @@ Successfully merged to: D:\Folder\Merged-20251006-143022.pdf
    - Download: https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/
    - License: GPL v2
 
-4. **Microsoft Office** (optional) - For Office document conversion
-   - Required for: DOCX, XLSX, PPTX files
+4. **Pandoc** - Document conversion
+   - Download: https://pandoc.org/installing.html
+   - License: GPL v2
+   - Requires: LaTeX distribution (MiKTeX or TeX Live) for PDF output
 
 ### Operating System
 
@@ -93,7 +95,9 @@ Successfully merged to: D:\Folder\Merged-20251006-143022.pdf
 |------|-----------|-------|
 | Images | JPG, JPEG, PNG, BMP, GIF, TIFF, TIF, WEBP | Converted at 300 DPI |
 | PDFs | PDF | Merged as-is |
-| Office | DOC, DOCX, XLS, XLSX, PPT, PPTX | Requires MS Office |
+| Office | DOC, DOCX, XLS, XLSX, PPT, PPTX | Via Pandoc |
+| OpenDocument | ODT, ODS, ODP | Via Pandoc |
+| Other Documents | RTF, EPUB, HTML, HTM | Via Pandoc |
 | Text | TXT | Basic conversion |
 
 ### Output
@@ -161,8 +165,8 @@ Run `Uninstall-SendTo.ps1` or manually delete:
 
 ## Troubleshooting
 
-### "Cannot find ImageMagick/Ghostscript/PDFtk"
-- Verify installation: `magick --version`, `gswin64c --version`, `pdftk --version`
+### "Cannot find ImageMagick/Ghostscript/PDFtk/Pandoc"
+- Verify installation: `magick --version`, `gswin64c --version`, `pdftk --version`, `pandoc --version`
 - Restart PowerShell/Explorer after installing tools
 - Ensure tools are in system PATH
 
@@ -171,10 +175,12 @@ Run `Uninstall-SendTo.ps1` or manually delete:
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Office Document Conversion Fails
-- Verify Microsoft Office is installed and activated
-- Try opening the document manually first
-- Check Office is not in safe mode
+### Document Conversion Fails
+- Install LaTeX distribution (required by Pandoc for PDF output)
+  - **MiKTeX**: https://miktex.org/download (recommended for Windows)
+  - **TeX Live**: https://www.tug.org/texlive/
+- Verify Pandoc can access LaTeX: `pandoc --pdf-engine=xelatex --version`
+- First conversion may be slow (LaTeX downloads packages)
 
 ### 32-bit Ghostscript
 Edit script, change `gswin64c.exe` to `gswin32c.exe`

@@ -18,6 +18,15 @@ Install these open-source tools:
 - Download: https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/
 - Verify: `pdftk --version`
 
+### 4. Pandoc
+- Download: https://pandoc.org/installing.html
+- Verify: `pandoc --version`
+
+### 5. LaTeX Distribution (required by Pandoc)
+- **MiKTeX** (recommended): https://miktex.org/download
+- **OR TeX Live**: https://www.tug.org/texlive/
+- Choose one, not both
+
 ## Installation
 
 ### 1. Copy Script
@@ -61,7 +70,9 @@ Or manually:
 
 - Images: JPG, PNG, BMP, GIF, TIFF, WEBP
 - PDFs: Merged as-is
-- Office: DOCX, XLSX, PPTX (requires MS Office)
+- Office: DOC, DOCX, XLS, XLSX, PPT, PPTX (via Pandoc)
+- OpenDocument: ODT, ODS, ODP (via Pandoc)
+- Other: RTF, EPUB, HTML, HTM (via Pandoc)
 - Text: TXT
 
 ## Output
@@ -86,9 +97,10 @@ Or manually delete: `%APPDATA%\Microsoft\Windows\SendTo\Convert & Merge to PDF.l
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Office conversion fails
-- Requires Microsoft Office installed and activated
-- Try opening document manually first
+### Document conversion fails
+- Install LaTeX distribution (MiKTeX or TeX Live)
+- Verify: `pandoc --pdf-engine=xelatex --version`
+- First conversion downloads LaTeX packages (slow)
 
 ### Ghostscript 32-bit
 Edit script, change `gswin64c.exe` to `gswin32c.exe`

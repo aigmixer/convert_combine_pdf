@@ -44,39 +44,16 @@ foreach ($file in $Files) {
                     Write-Host "  Failed to convert image" -ForegroundColor Red
                 }
             }
-            { $_ -in '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx' } {
-                # Convert Office documents using COM objects
-                Write-Host "  Converting Office document..." -ForegroundColor Yellow
+            { $_ -in '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp', '.rtf', '.epub', '.html', '.htm' } {
+                # Convert documents using Pandoc
+                Write-Host "  Converting with Pandoc..." -ForegroundColor Yellow
                 
-                if ($ext -in '.doc', '.docx') {
-                    $word = New-Object -ComObject Word.Application
-                    $word.Visible = $false
-                    $doc = $word.Documents.Open($file)
-                    $doc.SaveAs([ref]$tempPdf, [ref]17)
-                    $doc.Close()
-                    $word.Quit()
-                    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($word) | Out-Null
+                & pandoc "$file" -o "$tempPdf" --pdf-engine=xelatex 2>&1 | Out-Null
+                
+                if (Test-Path $tempPdf) {
                     $pdfFiles += $tempPdf
-                }
-                elseif ($ext -in '.xls', '.xlsx') {
-                    $excel = New-Object -ComObject Excel.Application
-                    $excel.Visible = $false
-                    $wb = $excel.Workbooks.Open($file)
-                    $wb.ExportAsFixedFormat(0, $tempPdf)
-                    $wb.Close()
-                    $excel.Quit()
-                    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
-                    $pdfFiles += $tempPdf
-                }
-                elseif ($ext -in '.ppt', '.pptx') {
-                    $ppt = New-Object -ComObject PowerPoint.Application
-                    $ppt.Visible = $false
-                    $presentation = $ppt.Presentations.Open($file)
-                    $presentation.SaveAs($tempPdf, 32)
-                    $presentation.Close()
-                    $ppt.Quit()
-                    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($ppt) | Out-Null
-                    $pdfFiles += $tempPdf
+                } else {
+                    Write-Host "  Failed to convert document" -ForegroundColor Red
                 }
             }
             { $_ -in '.txt' } {

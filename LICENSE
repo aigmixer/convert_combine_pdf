@@ -23,5 +23,6 @@ This project uses the following open-source components:
 - PDFtk Server: GPL v2 License
 - Ghostscript: AGPL License
 - ImageMagick: Apache 2.0 License
+- Pandoc: GPL v2 License
 
 Full license text: https://www.gnu.org/licenses/gpl-3.0.html
