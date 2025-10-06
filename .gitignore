@@ -1,0 +1,15 @@
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# PowerShell
+*.ps1~
+
+# Logs
+*.log
+
+# Test files
+test/
+temp/
+*.tmp
