@@ -44,8 +44,8 @@ foreach ($file in $Files) {
                     Write-Host "  Failed to convert image" -ForegroundColor Red
                 }
             }
-            { $_ -in '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.odt', '.ods', '.odp', '.rtf', '.epub', '.html', '.htm' } {
-                # Convert documents using Pandoc
+            { $_ -in '.doc', '.docx', '.ppt', '.pptx', '.odt', '.odp', '.rtf', '.epub', '.html', '.htm' } {
+                # Convert documents using Pandoc (excludes spreadsheets - Pandoc handles these poorly)
                 Write-Host "  Converting with Pandoc..." -ForegroundColor Yellow
                 
                 & pandoc "$file" -o "$tempPdf" --pdf-engine=xelatex 2>&1 | Out-Null
@@ -55,6 +55,11 @@ foreach ($file in $Files) {
                 } else {
                     Write-Host "  Failed to convert document" -ForegroundColor Red
                 }
+            }
+            { $_ -in '.xls', '.xlsx', '.ods' } {
+                # Spreadsheets not supported (Pandoc conversion unreliable)
+                Write-Host "  Spreadsheet files not supported - skipping" -ForegroundColor Yellow
+                Write-Host "  Tip: Export as PDF from spreadsheet application first" -ForegroundColor Gray
             }
             { $_ -in '.txt' } {
                 # Convert text to PDF using Ghostscript

@@ -95,10 +95,12 @@ Successfully merged to: D:\Folder\Merged-20251006-143022.pdf
 |------|-----------|-------|
 | Images | JPG, JPEG, PNG, BMP, GIF, TIFF, TIF, WEBP | Converted at 300 DPI |
 | PDFs | PDF | Merged as-is |
-| Office | DOC, DOCX, XLS, XLSX, PPT, PPTX | Via Pandoc |
-| OpenDocument | ODT, ODS, ODP | Via Pandoc |
+| Office Docs | DOC, DOCX, PPT, PPTX | Via Pandoc |
+| OpenDocument | ODT, ODP | Via Pandoc |
 | Other Documents | RTF, EPUB, HTML, HTM | Via Pandoc |
 | Text | TXT | Basic conversion |
+
+**Note:** Spreadsheets (XLS, XLSX, ODS) are not supported. Export to PDF from your spreadsheet application first.
 
 ### Output
 

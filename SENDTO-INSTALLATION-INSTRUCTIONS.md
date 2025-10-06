@@ -70,10 +70,12 @@ Or manually:
 
 - Images: JPG, PNG, BMP, GIF, TIFF, WEBP
 - PDFs: Merged as-is
-- Office: DOC, DOCX, XLS, XLSX, PPT, PPTX (via Pandoc)
-- OpenDocument: ODT, ODS, ODP (via Pandoc)
+- Office Docs: DOC, DOCX, PPT, PPTX (via Pandoc)
+- OpenDocument: ODT, ODP (via Pandoc)
 - Other: RTF, EPUB, HTML, HTM (via Pandoc)
 - Text: TXT
+
+**Note:** Spreadsheets (XLS, XLSX, ODS) not supported - export to PDF first.
 
 ## Output
 
